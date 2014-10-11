@@ -88,15 +88,15 @@ class Xfile
     			return $this;
     		}
     		if($type=='f') {
-				exec ("find {$this->current_path} -type f -exec chown {$user}:{} {} +", $this->output, $this->return_code);
+				exec ("find {$this->current_path} -type f -exec chown {$user}:{$group} {} +", $this->output, $this->return_code);
 				return true;
 			} else if($type=='d') {
-				exec ("find {$this->current_path} -type d -exec chmod 0{$permisions} {} +", $this->output, $this->return_code);
+				exec ("find {$this->current_path} -type d -exec chown {$user}:{$group} {} +", $this->output, $this->return_code);
 				return true;
 			} else if($type=='a') {
 				if(is_array($permisions) && array_key_exists('dir', $permisions) && array_key_exists('file', $permisions)) {
-					exec ("find {$this->current_path} -type f -exec chmod 0{$permisions['dir']} {} +", $this->output, $this->return_code);
-					exec ("find {$this->current_path} -type d -exec chmod 0{$permisions['file']} {} +", $this->output, $this->return_code);
+					exec ("find {$this->current_path} -type f -exec chown {$user}:{$group} {} +", $this->output, $this->return_code);
+					exec ("find {$this->current_path} -type d -exec chown {$user}:{$group} {} +", $this->output, $this->return_code);
 					return true;
 				}
 			} else {
